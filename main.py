@@ -113,7 +113,7 @@
 #     print()
 #     main3()
 
-def dec(num: str, cc: int) -> int:
+def dec(num: str, cc: int) -> int:  # перевод в десятичную сс целых чисел
     answer, k = 0, 0
     for i in range(len(num) - 1, -1, -1):
         if num[i] in nums:
@@ -124,7 +124,7 @@ def dec(num: str, cc: int) -> int:
     return answer
 
 
-def decFloat(num: str, cc: int) -> float:
+def decFloat(num: str, cc: int) -> float:  # перевод в десятичную сс чисел с плавающей точкой
     answer, k = 0, -1
     for i in num:
         if i in nums:
@@ -135,13 +135,13 @@ def decFloat(num: str, cc: int) -> float:
     return answer
 
 
-def getSymbol(num):
+def getSymbol(num):  # функция, которая возвращает числа 1 - 35 для сс
     if num < 10:
         return num
     return alp[str(num)]
 
 
-def toCC(num: int, cc: int) -> str:
+def toCC(num: int, cc: int) -> str:  # перевод в нужную сс целого числа
     r = ''
     while num > 0:
         r = str(getSymbol(num % cc)) + r
@@ -149,7 +149,7 @@ def toCC(num: int, cc: int) -> str:
     return r
 
 
-def getList(num: str, cc: int) -> list:
+def getList(num: str, cc: int) -> list:  # вспомогательная функция для перевода в нужную сс числа с плавающей точкой
     if int(num[:2]) < cc:
         l = [int(num[:2]), int(num[2:])]
     else:
@@ -157,9 +157,9 @@ def getList(num: str, cc: int) -> list:
     return l
 
 
-def toCC_float(num: float, cc: int) -> str:
+def toCC_float(num: float, cc: int) -> str:  # перевод в нужную сс числа с плавающей точкой
     r = ''
-    num = int(str(num).replace('0.', '', 1))
+    num = int(str(num).replace('0.', '', 1))  # отбрасываем дробную часть
     for i in range(5):
         n = getList(str(num * cc), cc)
         r = str(getSymbol(n[0])) + r
@@ -169,12 +169,12 @@ def toCC_float(num: float, cc: int) -> str:
     return r
 
 
-def main():
-    int_num, float_num = input().split(',')
-    cc_start, cc_end = int(input()), int(input())
+def main():  # точка запуска
     global alp, nums
     alp = {'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15, 'G': 16, 'H': 17, 'I': 18, 'J': 19, 'K': 20, 'L': 21, 'M': 22, 'N': 23, 'O': 24, 'P': 25, 'Q': 26, 'R': 27, 'S': 28, 'T': 29, 'U': 30, 'V': 31, 'W': 32, 'X': 33, 'Y': 34, 'Z': 35}
     nums = '0123456789'
+    int_num, float_num = input().split(',')
+    cc_start, cc_end = int(input()), int(input())
     dec_num, dec_float = dec(int_num, cc_start) + int(decFloat(float_num, cc_start)), decFloat(float_num, cc_start)
     print(dec_float)
     *args, dec_float_num = list(map(int, str(dec_float).split('.')))
@@ -183,5 +183,5 @@ def main():
     print(cc_num + ',' + cc_float)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # конструкция с точкой входа
     main()
